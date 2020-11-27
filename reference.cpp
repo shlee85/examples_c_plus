@@ -3,13 +3,21 @@
 #define A1 0
 #define A2 0
 #define A3 0
-#define A4 1
+#define A4 0
+#define A5 0
+#define A6 1
 
 void change_val(int& number)
 {
 	int a = 10;
 
 	number = a;
+}
+
+int& function(int& a)
+{
+	a = 5;
+	return a;
 }
 
 int main()
@@ -48,6 +56,24 @@ int main()
 	std::cout << ref << std::endl;
 	int a = ref;
 	std::cout << a << std::endl;
+#elif A5
+	int arr[3] = { 1,2,3 };
+
+	//int a,b int& arr[2] = {a,b};  방식은 불가능 하다. C++규정으로 안된다고 되어 있음.
+	//자세한 내용은 모두의코드. "참조자(modoocode.com/141)" 부분 참고 할 것.
+	int(&ref)[3] = arr;  
+
+	ref[0] = 9;
+	ref[1] = 8;
+	ref[2] = 7;
+
+	std::cout << arr[0] << "," << arr[1] << "," << arr[2] << std::endl;
+#else A6
+	/* tip. 원래 참조하던 것이 사라진 레퍼런스는 댕글링(Dangling)레퍼런스라고 한다. */
+
+	int b = 2;
+	int c = function(b);
+	std::cout << c << std::endl;
 #endif
 
 	return 0;
