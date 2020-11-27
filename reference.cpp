@@ -48,7 +48,6 @@ int main()
 	std::cout << ref << std::endl;
 	int a = ref;
 	std::cout << a << std::endl;
-
 #endif
 
 	return 0;
