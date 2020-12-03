@@ -1,4 +1,4 @@
-﻿//메모리 사용량이 계속 늘어나는 문제가 있음. 코드상의 문제를 찾고 해결하시오.
+﻿//메모리 사용량이 계속 늘어나는 문제가 있음. 코드상의 문제를 찾고 해결하시오. 
 
 #include <iostream>
 #include <string>
@@ -7,13 +7,16 @@ class MultipleChoiceTest
 {
 public:
     MultipleChoiceTest(int questionsCount)
+        : answers(NULL)
     {
         this->questionsCount = questionsCount;
-        answers = new int[questionsCount];
-        for (int i = 0; i < questionsCount; i++)
-        {
-            answers[i] = -1;
-        }
+        if(questionsCount > 0){
+            answers = new int[questionsCount];
+            for (int i = 0; i < questionsCount; i++)
+            {
+                answers[i] = -1;
+            }
+        }        
     }
 
     void setAnswer(int questionIndex, int answer)
@@ -24,6 +27,12 @@ public:
     int getAnswer(int questionIndex) const
     {
         return answers[questionIndex];
+    }
+    
+    ~MultipleChoiceTest()
+    {
+        if(answers) 
+            delete[] answers;
     }
 
 protected:
