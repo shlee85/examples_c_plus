@@ -64,6 +64,13 @@ public:
     {
         return times[questionIndex];
     }
+    
+    ~TimedMultipleChoiceTest()
+    {
+        if(times)
+            delete[] times;
+        
+    }
 
 private:
     int* times;
