@@ -47,7 +47,10 @@ void classB::D2()
 	cout << "D2" << endl;
 }
 #elif A1
-class CTest1
+// base class 의 관례적인 명칭 : base class, super class, parent class, 부모 클래스, 최상위 클래스 or 상위 클래스라 부른다.
+// derived class의 관례적인 명칭 : sub class, child class, 자식 클래스, 하위 클래스, 최하위 클래스라 부른다.
+// 접근 지정자 : public, private, protected 
+class CTest1	// base calss 
 {
 public :
 	int m_a;
@@ -63,7 +66,10 @@ protected:
 	void print();
 };
 
-class CTest2:public CTest1
+class CTest2 : public CTest1 //, public CTest3 (여러가지로 하면 다중상속이 된다)          
+							 //(부모 클래스를 상속 한다.)      
+							 // 접근지정자 없는 경우 디폴트로 private로 지정된다.
+							 // 만약 private로 상속하면 public는 private로 사용한다. 
 {
 public:
 	void print2();
