@@ -45,11 +45,48 @@ public:
 	void CreateLotteryNumber(/*vector<int>& machine*/);
 	int BonusLotteryNumber(vector<int>& machine);
 
+	//입력한 번호와 생성된 번호를 비교하여 순위를 매긴다.
+	int ret_ranking(vector<int>& machine, vector<int>& user_vec);
+
 	~Lottery() {
 		if (check_list)
 			delete[] check_list;
 	}
 };
+
+int Lottery::ret_ranking(vector<int>& machine, vector<int>& user_vec) {
+	int rank = 0;
+	int match = 0;
+	int bonus = 0;
+
+	for (int i = 0; i < machine.size(); i++) {
+		for (int j = 0; j < user_vec.size(); j++) {
+			if (machine[i] == user_vec[j]) {
+				if (i == (machine.size() - 1)) {
+					bonus = 1;
+				}
+				match++;			
+			}				
+		}		
+	}
+
+	cout << "math = " << match << endl;
+	cout << "bonus = " << bonus << endl;
+
+	switch (match) {
+	case 3: rank = 5; break;
+	case 4: rank = 4; break;
+	case 5: rank = 3; break;
+	case 6: 
+		if (bonus == 0)	rank = 1; 		
+		else rank = 2; 
+		
+		break;
+	default: rank = 0; break;
+	}
+
+	return rank;
+}
 
 int Lottery::BonusLotteryNumber(vector<int>& vec)
 {
@@ -102,10 +139,15 @@ void Lottery::CreateLotteryNumber(/*vector<int>& vec*/)
 
 	cout << "생성된 1등번호 + 보너스번호 : ";
 	for (int i = 0; i < machine_vec.size(); i++) {
-		cout << "[" << machine_vec[i] << "]";
+		cout << "[" << machine_vec[i] << "] ";
 	}
 
 	cout << endl;
+
+	int rank;
+	rank = ret_ranking(machine_vec, user_vec);
+
+	cout << "당신은 " << rank << "입니다." << endl;
 }
 
 bool check_number(int num)
